@@ -1,0 +1,228 @@
+{% extends '../HomePage/base.html' %}
+{% block content %}
+<link rel="stylesheet" href="../../static/Transaction/style.css">
+<main class="d-flex flex-nowrap">   
+    <div id="Sidebar" class="sidebar">
+        <a href="javascript:void(0)" id="boton_cierre" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+          <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+          <span id="pagename" class="fs-5 fw-semibold normal-text" style="text-align: center; margin-right: 27%;">Espaguetti Finanzas</span>
+        </a>
+        <form id="filtro-form" method="GET" action="{% url 'Transacciones del Usuario' %}">
+            <label for="tipo_filtro" class="fw-semibold normal-text" style="margin-left: 15%;">Filtrar por tipo:</label><br>
+            <select name="tipo_filtro" id="tipo_filtro" onchange="submitForm()" style="margin-left: 10%; padding-left: 10%;padding-right: 42%; border-radius: 10px 10px 10px 10px;">
+                <option value="" {% if tipo_filtro is None %}selected{% endif %}>Todos</option>
+                <option value="Egreso" {% if tipo_filtro == "Egreso" %}selected{% endif %}>Egreso</option>
+                <option value="Ingreso" {% if tipo_filtro == "Ingreso" %}selected{% endif %}>Ingreso</option>
+            </select>
+            <br><br>
+            <label for="categoria_filtro" class="fw-semibold normal-text" style="margin-left: 15%;">Filtrar por categoría:</label><br>
+            <select name="categoria_filtro" id="categoria_filtro" onchange="submitForm()" style="margin-left: 10%; padding-left: 10%;padding-right: 10%; border-radius: 10px 10px 10px 10px;">
+                <option value="" {% if categoria_filtro is None %}selected{% endif %}>Todas</option>
+                <option value="Alimentacion" {% if categoria_filtro == "Alimentacion" %}selected{% endif %}>Alimentación</option>
+                <option value="Vivienda" {% if categoria_filtro == "Vivienda" %}selected{% endif %}>Vivienda</option>
+                <option value="Salud" {% if categoria_filtro == "Salud" %}selected{% endif %}>Salud</option>
+                <option value="Transporte" {% if categoria_filtro == "Transporte" %}selected{% endif %}>Transporte</option>
+                <option value="Entretencion" {% if categoria_filtro == "Entretencion" %}selected{% endif %}>Entretención</option>
+                <option value="Sueldo" {% if categoria_filtro == "Sueldo" %}selected{% endif %}>Sueldo</option>
+                <option value="Ropa y accesorios" {% if categoria_filtro == "Ropa y accesorios" %}selected{% endif %}>Ropa y accesorios</option>
+                <option value="Tecnologia" {% if categoria_filtro == "Tecnologia" %}selected{% endif %}>Tecnología</option>
+                <option value="Viajes" {% if categoria_filtro == "Viajes" %}selected{% endif %}>Viajes</option>
+                <option value="Seguros" {% if categoria_filtro == "Seguros" %}selected{% endif %}>Seguros</option>
+                <option value="Deudas" {% if categoria_filtro == "Deudas" %}selected{% endif %}>Deudas</option>
+                <option value="Donaciones" {% if categoria_filtro == "Donaciones" %}selected{% endif %}>Donaciones</option>
+                <option value="Mascotas" {% if categoria_filtro == "Mascotas" %}selected{% endif %}>Mascotas</option>
+                <option value="Impuestos" {% if categoria_filtro == "Impuestos" %}selected{% endif %}>Impuestos</option>
+                <option value="Cuidado personal" {% if categoria_filtro == "Cuidado personal" %}selected{% endif %}>Cuidado personal</option>
+                <option value="Regalos" {% if categoria_filtro == "Regalos" %}selected{% endif %}>Regalos</option>
+                <option value="Ahorros" {% if categoria_filtro == "Ahorros" %}selected{% endif %}>Ahorros</option>
+                <option value="Educacion" {% if categoria_filtro == "Educacion" %}selected{% endif %}>Educacion</option>
+                <option value="Otro" {% if categoria_filtro == "Otro" %}selected{% endif %}>Otro</option>
+            </select>
+            <br><br>
+            <label for="fecha_inicio" class="fw-semibold normal-text" style="margin-left: 15%;">Fecha de inicio:</label><br>
+            <input  type="date" name="fecha_inicio" id="fecha_inicio" value="{% if fecha_inicio %}{{ fecha_inicio }}{% endif %}" style="margin-left: 10%; padding-left: 10%;padding-right: 15%; border-radius: 10px 10px 10px 10px;">
+            <br><br>
+            <label for="fecha_fin" class="fw-semibold normal-text" style="margin-left: 15%;">Fecha de fin:</label><br>
+            <input type="date" name="fecha_fin" id="fecha_fin" value="{% if fecha_fin %}{{ fecha_fin }}{% endif %}" style="margin-left: 10%; padding-left: 10%;padding-right: 15%; border-radius: 10px 10px 10px 10px;">
+            <br><br>
+            <div class="sidebackground">
+                <a class="gradient-text" style="font-size: medium; color: rgba(255, 89, 0, 0.843); padding-right: 10%; padding-left: 10%; text-align: center;" onclick="applyDateFilter()">Aplicar filtro fechas</a>
+            </div>
+            <div class="sidebackground" style="margin-top: 10px;">
+                <a class="gradient-text" style="font-size: medium; color: rgba(255, 89, 0, 0.843); padding-right: 20%; padding-left: 20%; text-align: center;" onclick="resetFilters()">Restablecer</a>
+            </div>
+        </form>
+        <hr id ="linea">
+        <br>
+        <div class="sidebackground">
+            <a class="gradient-text" style="font-size: medium; color: rgba(255, 89, 0, 0.843); padding-right: 20%; padding-left: 20%; text-align: center;" href="{% url 'HomePage' %}">Volver al Home</a>
+        </div>
+        <div class="sidebackground" style="margin-top: 10px; margin-bottom: 50px;">
+            <a class="gradient-text" style="font-size: medium; color: rgba(255, 89, 0, 0.843);" href="{% url 'Agregar Transacciones' %}">Añadir transacción</a>
+        </div>
+        <div class="cierre_sesion">
+            <a style="font-size: medium; text-align:center; padding-right: 20%; padding-left: 20%; width:200px; color: white;" href="{% url 'logout' %}">Cerrar sesión</a>
+        </div>
+        <div style="width: 0px; height: 0px;" id="borde_header">
+            <div id ='header'>
+                <h1 id="texto_header"></h1>
+            </div>
+        </div> 
+    </div>        
+    <div id="main">
+        <div style="position: absolute; top:2%; width: 2%;" id="topdiv">
+            <button class="openbtn" id="boton" onclick="openNav()">&#9776;</button>
+        </div>
+        <div class="col-md-3 ms-sm-auto col-lg-10 px-md-4" style="position: absolute; top:12%;"  id ="pagina_transacciones" >
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1>Transacciones</h1>              
+            </div>
+            {% if transactions %}
+            <h4>Hola {{user.username}}, a continuación se presentan sus transacciones.</h4>
+        
+            <table style="border-collapse: collapse; width: 100%; margin-top: 10px; margin-bottom: 10px;">
+                <col style="width: 20%">
+                <col style="width: 20%">
+                <col style="width: 20%">
+                <col style="width: 28%">
+                <col style="width: 12%">
+
+                <thead>
+                  <tr>
+                    <th style="border: 1px solid black; text-align: center; padding: 8px;">Monto</th>
+                    <th style="border: 1px solid black; text-align: center; padding: 8px;">
+                        Fecha
+                        {% if orden == 'fecha_asc' %}
+                            <a href="{{ transaction_url }}?{% if tipo_filtro %}tipo_filtro={{ tipo_filtro }}&{% endif %}{% if categoria_filtro %}categoria_filtro={{ categoria_filtro }}&{% endif %}{% if fecha_inicio %}fecha_inicio={{ fecha_inicio }}&{% endif %}{% if fecha_fin %}fecha_fin={{ fecha_fin }}&{% endif %}orden=fecha_desc">↑</a>
+                        {% elif orden == 'fecha_desc' %}
+                            <a href="{{ transaction_url }}?{% if tipo_filtro %}tipo_filtro={{ tipo_filtro }}&{% endif %}{% if categoria_filtro %}categoria_filtro={{ categoria_filtro }}&{% endif %}{% if fecha_inicio %}fecha_inicio={{ fecha_inicio }}&{% endif %}{% if fecha_fin %}fecha_fin={{ fecha_fin }}&{% endif %}orden=fecha_asc">↓</a>
+                        {% else %}
+                            <a href="{{ transaction_url }}?{% if tipo_filtro %}tipo_filtro={{ tipo_filtro }}&{% endif %}{% if categoria_filtro %}categoria_filtro={{ categoria_filtro }}&{% endif %}{% if fecha_inicio %}fecha_inicio={{ fecha_inicio }}&{% endif %}{% if fecha_fin %}fecha_fin={{ fecha_fin }}&{% endif %}orden=fecha_asc">↓</a>  
+                        {% endif %}
+                    </th>
+                    <th style="border: 1px solid black; text-align: center; padding: 8px;">Categoría</th>
+                    <th style="border: 1px solid black; text-align: center; padding: 8px;">Comentario</th>
+                    <th style="text-align: center">
+                        <button class="fw-bold" style="font-size: 12px; border-radius: 7px;" type="button" onclick="selectAllTransactions()">Seleccionar todo</button>
+                        <br>
+                        <button class="fw-bold" style="font-size: 12px; border-radius: 7px;" type="button" onclick="deselectAllTransactions()">Deseleccionar todo</button>
+                        <br>
+                        <button class="fw-bold" style="font-size: 12px; border-radius: 7px;" type="button" onclick="deleteTransactions()">Borrar seleccionadas</button>
+                    </th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                        {% for transaction in transactions %}
+                        <tr>
+                            {% if transaction.transaction_type == 'Egreso' %}
+                            <td style="color:#FF0000; border: 1px solid black; text-align: center; padding: 8px;">-${{transaction.amount}}</td>
+                            {% elif transaction.transaction_type == 'Ingreso' %}
+                            <td style="color:#00c20d; border: 1px solid black; text-align: center; padding: 8px;">${{transaction.amount}}</td>
+                            {% endif %}
+                            <td style="border: 1px solid black; text-align: center; padding: 8px;">{{transaction.date}}</td>
+                            <td style="border: 1px solid black; text-align: center; padding: 8px;">{{transaction.category}}</td>
+                            <td style="border: 1px solid black; text-align: center; padding: 8px; overflow: auto; word-break: break-all;">{{transaction.comment}}</td>
+                            <td style="border: 1px solid black; text-align: center; padding: 8px;"><input type="checkbox" name="transaction_ids" value="{{ transaction.id }}"> <a href="{% url 'Modificar Transaccion' transaction.id %}">Editar</a></td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <h3>Hola {{user.username}}, parece que no tiene transacciones... ¡Añada una!</h3>
+                    {% endif %}
+                </tbody>
+            </table>
+        
+            <script>
+                //Envio del formulario
+                function submitForm() {
+                    document.getElementById('filtro-form').submit();
+                }
+        
+                //Función para resetear los filtros
+                function resetFilters() {
+                    document.getElementById('tipo_filtro').value = "";
+                    document.getElementById('categoria_filtro').value = "";
+                    document.getElementById('fecha_inicio').value = "";
+                    document.getElementById('fecha_fin').value = "";
+                    submitForm();
+                }
+        
+                //Eliminar las transacciones por las checkboxes
+                function deleteTransactions() {
+                    const checkboxes = document.querySelectorAll('input[name="transaction_ids"]:checked');
+                    const transactionIds = Array.from(checkboxes).map(checkbox => checkbox.value);
+                    if (transactionIds.length === 0) {
+                        Swal.fire({
+                            title: 'Atención',
+                            text: 'Selecciona al menos una transacción para borrar.',
+                            icon: 'warning',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Entendido',
+                        })
+                        return;
+                    }
+                    
+                    Swal.fire({
+                        title: '¿Confirmas?',
+                        text: '¿Estás seguro de que deseas borrar las transacciones seleccionadas?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Sí, quiero borrarlas',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            const form = document.getElementById('filtro-form');
+                            const hiddenInput = document.createElement('input');
+                            hiddenInput.type = 'hidden';
+                            hiddenInput.name = 'delete_ids';
+                            hiddenInput.value = JSON.stringify(transactionIds);
+                            form.appendChild(hiddenInput);
+                            form.submit();
+                        }
+                    });
+                }
+
+                //Aplica el filtro de las fechas 
+                function applyDateFilter() {
+                    submitForm();
+                }
+        
+                //Marca todas las checkboxes
+                function selectAllTransactions() {
+                    const checkboxes = document.querySelectorAll('input[name="transaction_ids"]');
+                    checkboxes.forEach(checkbox => checkbox.checked = true);
+                }
+        
+                //Desarca todas las checkboxes
+                function deselectAllTransactions() {
+                    const checkboxes = document.querySelectorAll('input[name="transaction_ids"]');
+                    checkboxes.forEach(checkbox => checkbox.checked = false);
+                }
+            </script>   
+        </div>
+    </div>      
+</main>
+<script src="../../static/HomePage/switch_mode.js"></script>
+{% endblock %}
+{% block javascript %}
+<script>
+    /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+function openNav() {
+  document.getElementById("Sidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+  document.getElementById("boton").style.display = "none";
+  document.getElementById("pagina_principal").style.width = "80%";
+}
+
+/* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+function closeNav() {
+  document.getElementById("Sidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft = "0";
+  document.getElementById("boton").style.display = "block";
+  document.getElementById("pagina_principal").style.width = "94%";
+}
+</script>
+{% endblock %}

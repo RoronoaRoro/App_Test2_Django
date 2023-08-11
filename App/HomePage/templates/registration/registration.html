@@ -1,0 +1,82 @@
+{% extends 'HomePage/base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="../../static/LoginRegister/style.css">
+<div class="row justify-content-center">
+  <div class="col-md-3 ms-sm-auto col-lg-10 px-md-4" style="position: absolute; top:7%;">
+    <div class="container">
+      <div style="width: 700px; margin-left: auto; margin-right: auto;">
+          <div class="card mb-4 rounded-3 shadow-sm" id="borde_header">
+              <div class="card-header py-3 text-bg-primary" id ='header'>
+                <div class="small-margins">
+                  <h1 class="my-0 fw-semibold normal-text">Registrarse</h1>
+                </div>
+                <div >
+                  <p class="my-0 normal-text" style="text-align: center" > ¿Ya tienes una cuenta? <a class="link-body-emphasis d-inline-flex text-decoration-none rounded" href="{% url 'login' %}">Inicia sesión aquí</a> </p>
+                </div>
+              </div>
+              <div class="card-body">
+                {% if errores %}
+                <div class="alert alert-danger" role="alert">
+                    {% for error in errores %}
+                        {{ error }} <br>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="small-margins">
+                        <div class="tiny-margins">
+                            <h6 class="my-0 fw-normal">Nombre:</h6>
+                        </div>
+                        <div class="form-group">
+                            {{ registerform.user }}
+                        </div>
+                    </div>
+                    <div class="small-margins">
+                        <div class="tiny-margins">
+                            <h6 class="my-0 fw-normal">Correo Electrónico:</h6>
+                        </div>
+                        <div class="form-group">
+                            {{ registerform.email }}
+                        </div>
+                    </div>
+                    <div class="small-margins">
+                        <div class="tiny-margins">
+                            <h6 class="my-0 fw-normal">Contraseña:</h6>
+                        </div>
+                        <div class="form-group">
+                            {{ registerform.password }}
+                        </div>
+                    <div class="small-margins">
+                        <div class="tiny-margins">
+                            <h6 class="my-0 fw-normal">Repetir Contraseña:</h6>
+                        </div>
+                        <div class="form-group">
+                            {{ registerform.repeatPassword }}
+                        </div>
+                    </div>
+                  <div style="padding-top: 30px; padding-bottom: 10px; display: flex; justify-content: center">
+                    <div style="border-radius: 10px 10px 10px 10px;  align-self: center;" id="topdiv">
+                      <button type="submit" style="border-radius: 10px 10px 10px 10px;" id="boton">
+                        <div class="normal-text" style="width: 125px; margin-top: 5%; margin-bottom: 5%;">
+                            CREAR CUENTA
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div id="Sidebar" >
+  </div>        
+</div>
+
+</div>      
+{% endblock %}
+{% block javascript %}
+{% load static %}
+<script src="{% static 'HomePage/switch_mode.js' %}"></script>
+{% endblock %}

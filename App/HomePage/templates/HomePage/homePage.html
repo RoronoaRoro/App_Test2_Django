@@ -1,0 +1,115 @@
+{%extends "HomePage/base.html"%}
+{% block content %}
+    {% if user.is_authenticated %}
+    <main class="d-flex flex-nowrap">   
+        <div id="Sidebar" class="sidebar">
+            <a href="javascript:void(0)" id="boton_cierre" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+              <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+              <span id="pagename" class="fs-5 fw-semibold normal-text" style="text-align: center; margin-right: 27%;">Espaguetti Finanzas</span>
+            </a>
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none" aria-expanded="false">
+              <img style="margin-left: 18%; border: 1px solid black;" src="/static/ProfilePictures/{{ user.username.0|upper }}.png" alt="" width="100" height="100" class="rounded-circle me-2">   
+            </a>
+            <div style="margin-left: 20%; margin-right: 20%; width: 150px; height: auto; text-align:center;">
+                <strong id="nameuser" class="normal-text">Bienvenido(a) {{user.username}}</strong>
+            </div>
+            <hr id ="linea">
+            <br>
+            <div class="sidebackground">
+                <a class="gradient-text" style="font-size: medium; padding-right: 20%; padding-left: 20%; text-align: center;" href="{% url 'Transacciones del Usuario' %}">Ver todas las transacciones</a>
+            </div>
+            <div class="sidebackground" style="margin-top: 10px; margin-bottom: 175px;">
+                <a class="gradient-text" style="font-size: medium;" href="{% url 'Agregar Transacciones' %}">Añadir transacción</a>
+            </div>
+            <div class="cierre_sesion">
+                <a style="font-size: medium; text-align:center; padding-right: 20%; padding-left: 20%; width:200px; color: white;" href="{% url 'logout' %}">Cerrar sesión</a>
+            </div>
+        </div>        
+        <div id="main">
+            <div style="position: absolute; top:2%; width: 2%;" id="topdiv">
+                <button class="openbtn" id="boton" onclick="openNav()">&#9776;</button>
+            </div>
+            <div class="col-md-3 ms-sm-auto col-lg-10 px-md-4" style="position: absolute; top:12%;"  id ="pagina_principal" >
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1>Cartola del usuario {{user.username}}</h1>           
+                </div>
+                <div class="container">
+                    <div style="width: 250px; margin-left: auto; margin-right: auto;">
+                        <div class="card mb-4 rounded-3 shadow-sm" id="borde_header">
+                            <div class="card-header py-3 text-bg-primary" id ='header'>
+                                <h4 class="my-0 fw-normal" style="text-align: center;" id="texto_header">SALDO ACTUAL</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title " style="text-align: center; font-size: 27px;"> {{saldo}}<small class="text-body-secondary fw-light"></small></h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if transactions %}
+                <div class="container">
+                    <h2>Últimas transferencias ingresadas</h2>
+                    <div class="table-responsive small">
+                        <table class="table table-striped table-sm">
+                            <col style="width: 20%">
+                            <col style="width: 20%">
+                            <col style="width: 20%">
+                            <col style="width: 40%">
+                            <thead>
+                            <tr>
+                                <th scope="col">Monto</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Categoría</th>
+                                <th scope="col">Comentario</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for transaction in transactions %}
+                            <tr>
+                                {% if transaction.transaction_type == 'Egreso' %}
+                                <td style="color:#FF0000; border: 1px solid black; text-align: center; padding: 8px;">-${{transaction.amount}}</td>
+                                {% elif transaction.transaction_type == 'Ingreso' %}
+                                <td style="color:#00c20d; border: 1px solid black; text-align: center; padding: 8px;">${{transaction.amount}}</td>
+                                {% endif %}
+                                <td style="border: 1px solid black; text-align: center; padding: 8px;">{{transaction.date}}</td>
+                                <td style="border: 1px solid black; text-align: center; padding: 8px;">{{transaction.category}}</td>
+                                <td style="border: 1px solid black; text-align: center; padding: 8px; overflow: auto; word-break: break-all;">{{transaction.comment}}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>    
+                {% else %}
+                    <h2 style="text-align: center;"> No hay transacciones para mostrar.</h2>
+                {% endif %}
+            </div>
+        </div>      
+    </main>
+    {% else %}
+    <a href="{% url 'login' %}">Iniciar sesión.</a>
+    <a href="{% url 'registro' %}">Registrarse.</a>
+    {% endif %}
+
+{% endblock %}
+{% block javascript %}
+{% load static %}
+<script src="{% static 'HomePage/switch_mode.js' %}"></script>
+<script>
+    /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+function openNav() {
+  document.getElementById("Sidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+  document.getElementById("boton").style.display = "none";
+  document.getElementById("pagina_principal").style.width = "80%";
+}
+
+/* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+function closeNav() {
+  document.getElementById("Sidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft = "0";
+  document.getElementById("boton").style.display = "block";
+  document.getElementById("pagina_principal").style.width = "94%";
+}
+</script>
+{% endblock %}

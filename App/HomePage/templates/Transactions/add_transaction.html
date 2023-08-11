@@ -1,0 +1,70 @@
+{% extends '../HomePage/base.html' %}
+{% block css%}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/modificar_transaction.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="col-lg-6 offset-lg-3" style="text-align: center;">
+    <h1 name="titulo" id ="titulo" class="display-3">Añadir Transacción</h1>
+    <h5 name="descripcion" id="descripcion">Ingrese los datos de la transacción</h5>
+    <br>
+</div>
+{% if errores %}
+    <div class="alert alert-danger col-lg-6 offset-lg-3" role="alert" id="alerta">
+        {% for error in errores %}
+            {{ error }} 
+            <br>
+        {% endfor %}
+    </div>
+{% endif %}
+<form action="" method="post" id="form">
+    {% csrf_token %}
+    <div class="form-floating mb-3 col-lg-6 offset-lg-3">
+        {{ form.transaction_type }}
+        <label for="{{ form.transaction_type.type }}">Tipo de transacción (*)</label>
+    </div>
+
+    <div class="form-floating mb-3 col-lg-6 offset-lg-3">
+        {{ form.category }}
+        <label for="{{ form.category.category }}">Categoría (*)</label>
+    </div>
+
+    <div class="form-floating mb-3 col-lg-6 offset-lg-3">
+        {{ form.amount }}
+        <label for="{{ form.amount.amount }}">Cantidad (*)</label>
+    </div>
+
+    <div class="form-floating mb-3 col-lg-6 offset-lg-3">
+        {{ form.date }}
+        <label for="{{ form.date.date }}">Fecha (*)</label>
+    </div>
+
+    <div class="form-floating mb-3 col-lg-6 offset-lg-3">
+        {{ form.comment }}
+        <label for="{{ form.comment.comment }}">Comentario</label>
+    </div>
+
+    <div class="row">
+        <div class="col-auto offset-lg-3" style="text-align: center;">
+            <button type="button" name="modi" value="modi" id="modi" class="btn btn-primary">Agregar</button>
+        </div>
+        <div class="col-auto" id="cancelar">
+            <a class="btn btn-primary" id="cancel" href="{% url 'Transacciones del Usuario' %}">Cancelar</a>
+        </div>
+    </div>
+    <input type="hidden" value="3" id="cambio">
+    <input type="hidden" id="errores" value="{{ errores }}">
+</form>
+{% endblock %}
+
+{% block javascript %}
+{% if errores %}
+<script>
+    // Se cambia valor para no tener errores con botón de confirmación de modificación
+    document.getElementById('cambio').value = '1';
+</script>
+{% endif %}
+{% load static %}
+<script src="{% static 'js/annadir_transaction.js' %}"></script>
+{% endblock %}
