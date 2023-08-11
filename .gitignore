@@ -1,7 +1,5 @@
 **/migrations/
 myenv/
 **/__pycache__/
-**/db.sqlite3
 **.pyc
 **.sh
-**.sqlite3
