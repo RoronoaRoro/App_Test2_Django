@@ -12,15 +12,14 @@
           <span id="pagename" class="fs-5 fw-semibold normal-text" style="text-align: center; margin-right: 27%;">Espaguetti Finanzas</span>
         </a>
         <form id="filtro-form" method="GET" action="{% url 'Transacciones del Usuario' %}">
-            <label for="tipo_filtro" class="fw-semibold normal-text" style="margin-left: 15%;">Filtrar por tipo:</label><br>
-            <select name="tipo_filtro" id="tipo_filtro" onchange="submitForm()" style="margin-left: 10%; padding-left: 10%;padding-right: 42%; border-radius: 10px 10px 10px 10px;">
+            <label for="tipo_filtro" class="fw-semibold normal-text label-filtros">Filtrar por tipo:</label><br>
+            <select name="tipo_filtro" id="tipo_filtro" onchange="submitForm()" class="filtros">
                 <option value="" {% if tipo_filtro is None %}selected{% endif %}>Todos</option>
                 <option value="Egreso" {% if tipo_filtro == "Egreso" %}selected{% endif %}>Egreso</option>
                 <option value="Ingreso" {% if tipo_filtro == "Ingreso" %}selected{% endif %}>Ingreso</option>
             </select>
-            <br><br>
-            <label for="categoria_filtro" class="fw-semibold normal-text" style="margin-left: 15%;">Filtrar por categoría:</label><br>
-            <select name="categoria_filtro" id="categoria_filtro" onchange="submitForm()" style="margin-left: 10%; padding-left: 10%;padding-right: 10%; border-radius: 10px 10px 10px 10px;">
+            <label for="categoria_filtro" class="fw-semibold normal-text label-filtros">Filtrar por categoría:</label><br>
+            <select name="categoria_filtro" id="categoria_filtro" onchange="submitForm()" class="filtros">
                 <option value="" {% if categoria_filtro is None %}selected{% endif %}>Todas</option>
                 <option value="Alimentacion" {% if categoria_filtro == "Alimentacion" %}selected{% endif %}>Alimentación</option>
                 <option value="Vivienda" {% if categoria_filtro == "Vivienda" %}selected{% endif %}>Vivienda</option>
@@ -42,13 +41,10 @@
                 <option value="Educacion" {% if categoria_filtro == "Educacion" %}selected{% endif %}>Educacion</option>
                 <option value="Otro" {% if categoria_filtro == "Otro" %}selected{% endif %}>Otro</option>
             </select>
-            <br><br>
-            <label for="fecha_inicio" class="fw-semibold normal-text" style="margin-left: 15%;">Fecha de inicio:</label><br>
-            <input  type="date" name="fecha_inicio" id="fecha_inicio" value="{% if fecha_inicio %}{{ fecha_inicio }}{% endif %}" style="margin-left: 10%; padding-left: 10%;padding-right: 15%; border-radius: 10px 10px 10px 10px;">
-            <br><br>
-            <label for="fecha_fin" class="fw-semibold normal-text" style="margin-left: 15%;">Fecha de fin:</label><br>
-            <input type="date" name="fecha_fin" id="fecha_fin" value="{% if fecha_fin %}{{ fecha_fin }}{% endif %}" style="margin-left: 10%; padding-left: 10%;padding-right: 15%; border-radius: 10px 10px 10px 10px;">
-            <br><br>
+            <label for="fecha_inicio" class="fw-semibold normal-text label-filtros">Fecha de inicio:</label><br>
+            <input  type="date" name="fecha_inicio" id="fecha_inicio" value="{% if fecha_inicio %}{{ fecha_inicio }}{% endif %}" style="margin-left: 10%; margin-bottom: 4px; padding-left: 10%;padding-right: 15%; border-radius: 10px 10px 10px 10px;">
+            <label for="fecha_fin" class="fw-semibold normal-text label-filtros">Fecha de fin:</label><br>
+            <input type="date" name="fecha_fin" id="fecha_fin" value="{% if fecha_fin %}{{ fecha_fin }}{% endif %}" style="margin-left: 10%; margin-bottom: 12px; padding-left: 10%;padding-right: 15%; border-radius: 10px 10px 10px 10px;">
             <div class="sidebackground">
                 <a class="gradient-text" style="font-size: medium; color: rgba(255, 89, 0, 0.843); padding-right: 10%; padding-left: 10%; text-align: center;" onclick="applyDateFilter()">Aplicar filtro fechas</a>
             </div>
@@ -57,11 +53,10 @@
             </div>
         </form>
         <hr id ="linea">
-        <br>
         <div class="sidebackground">
             <a class="gradient-text" style="font-size: medium; color: rgba(255, 89, 0, 0.843); padding-right: 20%; padding-left: 20%; text-align: center;" href="{% url 'HomePage' %}">Volver al Home</a>
         </div>
-        <div class="sidebackground" style="margin-top: 10px; margin-bottom: 50px;">
+        <div class="sidebackground" style="margin-top: 10px; margin-bottom: 45px;">
             <a class="gradient-text" style="font-size: medium; color: rgba(255, 89, 0, 0.843);" href="{% url 'Agregar Transacciones' %}">Añadir transacción</a>
         </div>
         <div class="cierre_sesion">
@@ -84,7 +79,12 @@
             {% if transactions %}
             <h4>Hola {{user.username}}, a continuación se presentan sus transacciones.</h4>
         
-            <table style="border-collapse: collapse; width: 100%; margin-top: 10px; margin-bottom: 10px;">
+            <div style="text-align: left">
+                <button class="fw-bold seleccionador seleccionadores" type="button" onclick="selectAllTransactions()">Seleccionar todo</button>
+                <button class="fw-bold seleccionador seleccionadores" type="button" onclick="deselectAllTransactions()">Deseleccionar todo</button>
+                <button class="fw-bold seleccionador seleccionadores" type="button" onclick="deleteTransactions()">Borrar seleccionadas</button>
+            </div>
+            <table id="tabla">
                 <col style="width: 20%">
                 <col style="width: 20%">
                 <col style="width: 20%">
@@ -93,8 +93,8 @@
 
                 <thead>
                   <tr>
-                    <th style="border: 1px solid black; text-align: center; padding: 8px;">Monto</th>
-                    <th style="border: 1px solid black; text-align: center; padding: 8px;">
+                    <th class="ths" style="border: 1px solid black; text-align: center; padding: 8px;">Monto</th>
+                    <th class="ths" style="border: 1px solid black; text-align: center; padding: 8px;">
                         Fecha
                         {% if orden == 'fecha_asc' %}
                             <a href="{{ transaction_url }}?{% if tipo_filtro %}tipo_filtro={{ tipo_filtro }}&{% endif %}{% if categoria_filtro %}categoria_filtro={{ categoria_filtro }}&{% endif %}{% if fecha_inicio %}fecha_inicio={{ fecha_inicio }}&{% endif %}{% if fecha_fin %}fecha_fin={{ fecha_fin }}&{% endif %}orden=fecha_desc">↑</a>
@@ -104,15 +104,8 @@
                             <a href="{{ transaction_url }}?{% if tipo_filtro %}tipo_filtro={{ tipo_filtro }}&{% endif %}{% if categoria_filtro %}categoria_filtro={{ categoria_filtro }}&{% endif %}{% if fecha_inicio %}fecha_inicio={{ fecha_inicio }}&{% endif %}{% if fecha_fin %}fecha_fin={{ fecha_fin }}&{% endif %}orden=fecha_asc">↓</a>  
                         {% endif %}
                     </th>
-                    <th style="border: 1px solid black; text-align: center; padding: 8px;">Categoría</th>
-                    <th style="border: 1px solid black; text-align: center; padding: 8px;">Comentario</th>
-                    <th style="text-align: center">
-                        <button class="fw-bold" style="font-size: 12px; border-radius: 7px;" type="button" onclick="selectAllTransactions()">Seleccionar todo</button>
-                        <br>
-                        <button class="fw-bold" style="font-size: 12px; border-radius: 7px;" type="button" onclick="deselectAllTransactions()">Deseleccionar todo</button>
-                        <br>
-                        <button class="fw-bold" style="font-size: 12px; border-radius: 7px;" type="button" onclick="deleteTransactions()">Borrar seleccionadas</button>
-                    </th>
+                    <th class="ths" style="border: 1px solid black; text-align: center; padding: 8px;">Categoría</th>
+                    <th class="ths" style="border: 1px solid black; text-align: center; padding: 8px;">Comentario</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -127,7 +120,7 @@
                             <td style="border: 1px solid black; text-align: center; padding: 8px;">{{transaction.date}}</td>
                             <td style="border: 1px solid black; text-align: center; padding: 8px;">{{transaction.category}}</td>
                             <td style="border: 1px solid black; text-align: center; padding: 8px; overflow: auto; word-break: break-all;">{{transaction.comment}}</td>
-                            <td style="border: 1px solid black; text-align: center; padding: 8px;"><input type="checkbox" name="transaction_ids" value="{{ transaction.id }}"> <a href="{% url 'Modificar Transaccion' transaction.id %}">Editar</a></td>
+                            <td style="border: 1px solid black; text-align: center; padding: 8px;"><input type="checkbox" name="transaction_ids" value="{{ transaction.id }}"> <a class="modificar seleccionadores" href="{% url 'Modificar Transaccion' transaction.id %}">Editar</a></td>
                         </tr>
                         {% endfor %}
                     {% else %}

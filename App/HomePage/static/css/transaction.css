@@ -9,3 +9,93 @@
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+.filtros {
+    margin-bottom: 4px; 
+    width: 200px; 
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-left: 10%;
+    border-radius: 10px 10px 10px 10px;
+}
+.label-filtros {
+    margin-left: 15%;
+    margin-right: 10%;
+    width: 200px; 
+}
+
+.modificar {
+    text-decoration: none;
+    background: linear-gradient(180deg, #ff7a7a, #ff914d);
+    color: black;
+    padding-left:4px;
+    padding-right:4px;
+    border-radius: 4px;
+}
+
+.modificar:hover {
+    background: linear-gradient(180deg, #ff3131, #ff914d);
+    transition:0.3s;
+}
+
+.seleccionador {
+    font-size: 14px; 
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    color: rgb(77, 77, 77);
+    background: linear-gradient(180deg, #ff7a7a, #ff914d);
+    margin-top: 6px;
+}
+
+.seleccionador:hover {
+    background: linear-gradient(180deg, #ff3131, #ff914d);
+    transition:0.3s;
+}
+
+.modificar_oscuro {
+    text-decoration: none;
+    background: linear-gradient(360deg, #614030 , rgb(33, 37, 41));
+    color: rgb(222, 226, 230);
+    padding-left:4px;
+    padding-right:4px;
+    border-radius: 4px;
+}
+
+.modificar_oscuro:hover {
+    background: linear-gradient(360deg, #581D00 , rgb(33, 37, 41));
+    transition:0.3s;
+}
+
+.seleccionador_oscuro {
+    font-size: 14px; 
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    color: rgb(222, 226, 230);
+    background: linear-gradient(360deg, #614030 , rgb(33, 37, 41));
+    margin-top: 6px;
+}
+
+.seleccionador_oscuro:hover {
+    background: linear-gradient(360deg, #581D00 , rgb(33, 37, 41));
+    transition:0.3s;
+}
+
+#tabla {
+    border-collapse: collapse; 
+    width: 100%; 
+    margin-top: 10px; 
+    margin-bottom: 10px;
+    border-radius: 20px;
+}
+
+th {
+    background: linear-gradient(180deg, #ff3131, #ff914d);
+}
+
+table {
+    border-radius: 20px !important;
+}
+
+th:last-child {
+    background: transparent !important;
+}

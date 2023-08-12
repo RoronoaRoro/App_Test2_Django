@@ -15,6 +15,9 @@ let linea = document.getElementById('linea'); // Línea divisora (<hr>)
 let texto_gradiente = document.querySelectorAll('.gradient-text'); // Clase para modificar color de texto de agregar y ver transacciones en sidebar
 let texto_normal = document.querySelectorAll('.normal-text'); // Clase para modificar color de texto adicional de la sidebar
 let sidebackground = document.querySelectorAll('.sidebackground'); // Clase para modificar fondo de agregar y ver transacciones de sidebar
+let modificadores = document.querySelectorAll('.modificadores');
+let seleccionadores = document.querySelectorAll('.seleccionadores');
+let ths = document.querySelectorAll('.ths');
 // Se crea un observador de atributos para el botón
 const observer = new MutationObserver((mutationsList) => {
     for (const mutation of mutationsList) {
@@ -40,6 +43,17 @@ const observer = new MutationObserver((mutationsList) => {
                 sidebackground.forEach(function(elemento) {
                     elemento.style.backgroundColor = '#818181';
                 });
+                modificadores.forEach(function(elemento) {
+                    elemento.classList.remove('modificar');
+                    elemento.classList.add('modificar_oscuro');
+                });
+                seleccionadores.forEach(function(elemento) {
+                    elemento.classList.remove('seleccionador');
+                    elemento.classList.add('seleccionador_oscuro');
+                });
+                ths.forEach(function(elemento) {
+                    elemento.style.background = 'linear-gradient(360deg, #581D00 , rgb(33, 37, 41))';
+                });
                 boton_cierre.style.color = '#ffffff';
                 linea.style.color = 'rgb(173, 181, 189)';
                 linea.style.opacity = '0.25';
@@ -60,6 +74,17 @@ const observer = new MutationObserver((mutationsList) => {
                 });
                 sidebackground.forEach(function(elemento) {
                     elemento.style.backgroundColor = 'white';
+                });
+                modificadores.forEach(function(elemento) {
+                    elemento.classList.remove('modificar_oscuro');
+                    elemento.classList.add('modificar');
+                });
+                seleccionadores.forEach(function(elemento) {
+                    elemento.classList.remove('seleccionador_oscuro');
+                    elemento.classList.add('seleccionador');
+                });
+                ths.forEach(function(elemento) {
+                    elemento.style.background = 'linear-gradient(180deg, #ff3131, #ff914d)';
                 });
                 boton_cierre.style.color = '#111';
                 linea.style.color = 'white';
@@ -90,6 +115,17 @@ function applyThemeStyle() {
         sidebackground.forEach(function(elemento) {
             elemento.style.backgroundColor = '#818181';
         });
+        modificadores.forEach(function(elemento) {
+            elemento.classList.remove('modificar');
+            elemento.classList.add('modificar_oscuro');
+        });
+        seleccionadores.forEach(function(elemento) {
+            elemento.classList.remove('seleccionador');
+            elemento.classList.add('seleccionador_oscuro');
+        });
+        ths.forEach(function(elemento) {
+            elemento.style.background = 'linear-gradient(360deg, #581D00 , rgb(33, 37, 41))';
+        });
         boton_cierre.style.color = '#ffffff';
         linea.style.color = 'rgb(173, 181, 189)';
         linea.style.opacity = '0.25';
@@ -110,6 +146,17 @@ function applyThemeStyle() {
         });
         sidebackground.forEach(function(elemento) {
             elemento.style.backgroundColor = 'white';
+        });
+        modificadores.forEach(function(elemento) {
+            elemento.classList.remove('modificar_oscuro');
+            elemento.classList.add('modificar');
+        });
+        seleccionadores.forEach(function(elemento) {
+            elemento.classList.remove('seleccionador_oscuro');
+            elemento.classList.add('seleccionador');
+        });
+        ths.forEach(function(elemento) {
+            elemento.style.background = 'linear-gradient(180deg, #ff3131, #ff914d)';
         });
         boton_cierre.style.color = '#111';
         linea.style.color = 'white';
