@@ -5,14 +5,14 @@ from django.utils import timezone
 
 
 class RegisterForm(forms.Form):
-    user = forms.CharField(label="Usuario", required = True)
-    email = forms.EmailField(label="Correo electrónico", required = True)
-    password = forms.CharField(label="Contraseña", widget=forms.PasswordInput,required = True)
-    repeatPassword  = forms.CharField(label="Repetir contraseña", widget=forms.PasswordInput,required = True)
+    user = forms.CharField(label="Usuario", required = True, widget=forms.TextInput(attrs={'class': 'form-control inputs', 'placeholder': 'Usuario', 'id': 'usuario'}))
+    email = forms.EmailField(label="Correo electrónico", required = True, widget=forms.TextInput(attrs={'class': 'form-control inputs', 'placeholder': 'Correo electrónico', 'id': 'email'}))
+    password = forms.CharField(label="Contraseña", widget=forms.PasswordInput(attrs={'class': 'form-control inputs', 'placeholder': 'Contraseña', 'id': 'contrasenna'}),required = True)
+    repeatPassword  = forms.CharField(label="Repetir contraseña", widget=forms.PasswordInput(attrs={'class': 'form-control inputs', 'placeholder': 'Repetir contraseña', 'id': 'repetir_contrasenna'}),required = True)
 
 class LoginForm(forms.Form):
-    user = forms.CharField(label="Usuario", required = True)
-    password = forms.CharField(label="Contraseña", widget=forms.PasswordInput,required = True)
+    user = forms.CharField(label="Usuario", required = True, widget=forms.TextInput(attrs={'class': 'form-control inputs', 'placeholder': 'Usuario', 'id': 'usuario'}))
+    password = forms.CharField(label="Contraseña", widget=forms.PasswordInput(attrs={'class': 'form-control inputs', 'placeholder': 'Contraseña', 'id': 'contrasenna'}), required = True)
 
 
 

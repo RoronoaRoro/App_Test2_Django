@@ -1,82 +1,66 @@
 {% extends 'HomePage/base.html' %}
-
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/login-register.css' %}">
+{% endblock %}
 {% block content %}
-<link rel="stylesheet" href="../../static/LoginRegister/style.css">
 <div class="row justify-content-center">
-  <div class="col-md-3 ms-sm-auto col-lg-10 px-md-4" style="position: absolute; top:7%;">
-    <div class="container">
-      <div style="width: 700px; margin-left: auto; margin-right: auto;">
-          <div class="card mb-4 rounded-3 shadow-sm" id="borde_header">
-              <div class="card-header py-3 text-bg-primary" id ='header'>
-                <div class="small-margins">
-                  <h1 class="my-0 fw-semibold normal-text">Registrarse</h1>
+    <div style="position: absolute; top:7%;">
+        <div class="container">
+            <div id="cuadro">
+                <div class="card mb-4 rounded-3 shadow-sm" id="borde_header">
+                    <div class="card-header py-3 text-bg-primary" id ='header'>
+                        <div class="small-margins">
+                            <h1 class="my-0 fw-semibold normal-text">Registro de usuario</h1>
+                        </div>
+                        <div>
+                            <p class="my-0 normal-text" style="text-align: center" > ¿Ya tiene una cuenta? <a class="link-body-emphasis d-inline-flex text-decoration-none rounded" href="{% url 'login' %}">Inicie sesión aquí</a> </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        {% if errores %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for error in errores %}
+                                {{ error }} <br>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="form-floating mb-3 col-lg-6 offset-lg-3">
+                                {{ registerform.user }}
+                                <label for="{{ registerform.user.usuario }}">Nombre de usuario</label>
+                            </div>
+                            <div class="form-floating mb-3 col-lg-6 offset-lg-3">
+                                {{ registerform.email }}
+                                <label for="{{ registerform.email.email }}">Email</label>
+                            </div>
+                            <div class="form-floating mb-3 col-lg-6 offset-lg-3">
+                                {{ registerform.password }}
+                                <label for="{{ registerform.password.contrasenna }}">Contraseña</label>
+                            </div>
+                            <div class="form-floating mb-3 col-lg-6 offset-lg-3">
+                                {{ registerform.repeatPassword }}
+                                <label for="{{ registerform.repeatPassword.repetir_contrasenna }}">Repetir contraseña</label>
+                            </div>
+                            <div style="padding-top: 30px; padding-bottom: 10px; display: flex; justify-content: center">
+                                <div style="border-radius: 10px 10px 10px 10px;  align-self: center;" id="topdiv">
+                                    <button type="submit" style="border-radius: 10px 10px 10px 10px;" id="boton">
+                                        <div class="normal-text" style="width: 125px; margin-top: 5%; margin-bottom: 5%;">
+                                            CREAR CUENTA
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div >
-                  <p class="my-0 normal-text" style="text-align: center" > ¿Ya tienes una cuenta? <a class="link-body-emphasis d-inline-flex text-decoration-none rounded" href="{% url 'login' %}">Inicia sesión aquí</a> </p>
-                </div>
-              </div>
-              <div class="card-body">
-                {% if errores %}
-                <div class="alert alert-danger" role="alert">
-                    {% for error in errores %}
-                        {{ error }} <br>
-                    {% endfor %}
-                </div>
-                {% endif %}
-                <form method="post">
-                    {% csrf_token %}
-                    <div class="small-margins">
-                        <div class="tiny-margins">
-                            <h6 class="my-0 fw-normal">Nombre:</h6>
-                        </div>
-                        <div class="form-group">
-                            {{ registerform.user }}
-                        </div>
-                    </div>
-                    <div class="small-margins">
-                        <div class="tiny-margins">
-                            <h6 class="my-0 fw-normal">Correo Electrónico:</h6>
-                        </div>
-                        <div class="form-group">
-                            {{ registerform.email }}
-                        </div>
-                    </div>
-                    <div class="small-margins">
-                        <div class="tiny-margins">
-                            <h6 class="my-0 fw-normal">Contraseña:</h6>
-                        </div>
-                        <div class="form-group">
-                            {{ registerform.password }}
-                        </div>
-                    <div class="small-margins">
-                        <div class="tiny-margins">
-                            <h6 class="my-0 fw-normal">Repetir Contraseña:</h6>
-                        </div>
-                        <div class="form-group">
-                            {{ registerform.repeatPassword }}
-                        </div>
-                    </div>
-                  <div style="padding-top: 30px; padding-bottom: 10px; display: flex; justify-content: center">
-                    <div style="border-radius: 10px 10px 10px 10px;  align-self: center;" id="topdiv">
-                      <button type="submit" style="border-radius: 10px 10px 10px 10px;" id="boton">
-                        <div class="normal-text" style="width: 125px; margin-top: 5%; margin-bottom: 5%;">
-                            CREAR CUENTA
-                        </div>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-          </div>
-      </div>
-  </div>
-  <div id="Sidebar" >
-  </div>        
-</div>
-
+            </div>
+        </div>     
+    </div>
 </div>      
 {% endblock %}
 {% block javascript %}
 {% load static %}
-<script src="{% static 'HomePage/switch_mode.js' %}"></script>
+<script src="{% static 'js/login-register.js' %}"></script>
 {% endblock %}

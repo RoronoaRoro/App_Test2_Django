@@ -1,0 +1,34 @@
+.big-margins {
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+.small-margins {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    text-align:center;
+}
+
+.tiny-margins {
+    margin-top: 0px;
+    margin-bottom: 5px;
+    text-align:center;
+}
+
+#cuadro {
+    width: 50%; 
+    margin-left: 25%; 
+    margin-right: auto;
+}
+
+@media (max-width: 991.9px) {
+    #cuadro {
+        width: 90%; 
+        margin-left: 5%; 
+        margin-right: auto;
+    }
+}
+
+.inputs {
+    border: 1px solid rgb(73, 80, 87) !important;
+}

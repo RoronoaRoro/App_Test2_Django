@@ -116,3 +116,85 @@ function applyThemeStyle() {
         linea.style.opacity = '0.75';
     }
 }
+
+//Envio del formulario
+function submitForm() {
+    document.getElementById('filtro-form').submit();
+}
+
+//Función para resetear los filtros
+function resetFilters() {
+    document.getElementById('tipo_filtro').value = "";
+    document.getElementById('categoria_filtro').value = "";
+    document.getElementById('fecha_inicio').value = "";
+    document.getElementById('fecha_fin').value = "";
+    submitForm();
+}
+
+//Eliminar las transacciones por las checkboxes
+function deleteTransactions() {
+    const checkboxes = document.querySelectorAll('input[name="transaction_ids"]:checked');
+    const transactionIds = Array.from(checkboxes).map(checkbox => checkbox.value);
+    if (transactionIds.length === 0) {
+        Swal.fire({
+            title: 'Atención',
+            text: 'Selecciona al menos una transacción para borrar.',
+            icon: 'warning',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Entendido',
+        })
+        return;
+    }
+    
+    Swal.fire({
+        title: '¿Confirmas?',
+        text: '¿Estás seguro de que deseas borrar las transacciones seleccionadas?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, quiero borrarlas',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const form = document.getElementById('filtro-form');
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'delete_ids';
+            hiddenInput.value = JSON.stringify(transactionIds);
+            form.appendChild(hiddenInput);
+            form.submit();
+        }
+    });
+}
+
+//Aplica el filtro de las fechas 
+function applyDateFilter() {
+    submitForm();
+}
+
+//Marca todas las checkboxes
+function selectAllTransactions() {
+    const checkboxes = document.querySelectorAll('input[name="transaction_ids"]');
+    checkboxes.forEach(checkbox => checkbox.checked = true);
+}
+
+//Desmarca todas las checkboxes
+function deselectAllTransactions() {
+    const checkboxes = document.querySelectorAll('input[name="transaction_ids"]');
+    checkboxes.forEach(checkbox => checkbox.checked = false);
+}
+
+/* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+function openNav() {
+  document.getElementById("Sidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+  document.getElementById("boton").style.display = "none";
+}
+  
+/* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+function closeNav() {
+  document.getElementById("Sidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft = "0";
+  document.getElementById("boton").style.display = "block";
+}

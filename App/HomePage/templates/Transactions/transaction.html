@@ -1,6 +1,9 @@
 {% extends '../HomePage/base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/transaction.css' %}">
+{% endblock %}
 {% block content %}
-<link rel="stylesheet" href="../../static/Transaction/style.css">
 <main class="d-flex flex-nowrap">   
     <div id="Sidebar" class="sidebar">
         <a href="javascript:void(0)" id="boton_cierre" class="closebtn" onclick="closeNav()">&times;</a>
@@ -132,97 +135,11 @@
                     {% endif %}
                 </tbody>
             </table>
-        
-            <script>
-                //Envio del formulario
-                function submitForm() {
-                    document.getElementById('filtro-form').submit();
-                }
-        
-                //Función para resetear los filtros
-                function resetFilters() {
-                    document.getElementById('tipo_filtro').value = "";
-                    document.getElementById('categoria_filtro').value = "";
-                    document.getElementById('fecha_inicio').value = "";
-                    document.getElementById('fecha_fin').value = "";
-                    submitForm();
-                }
-        
-                //Eliminar las transacciones por las checkboxes
-                function deleteTransactions() {
-                    const checkboxes = document.querySelectorAll('input[name="transaction_ids"]:checked');
-                    const transactionIds = Array.from(checkboxes).map(checkbox => checkbox.value);
-                    if (transactionIds.length === 0) {
-                        Swal.fire({
-                            title: 'Atención',
-                            text: 'Selecciona al menos una transacción para borrar.',
-                            icon: 'warning',
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'Entendido',
-                        })
-                        return;
-                    }
-                    
-                    Swal.fire({
-                        title: '¿Confirmas?',
-                        text: '¿Estás seguro de que deseas borrar las transacciones seleccionadas?',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Sí, quiero borrarlas',
-                        cancelButtonText: 'Cancelar'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            const form = document.getElementById('filtro-form');
-                            const hiddenInput = document.createElement('input');
-                            hiddenInput.type = 'hidden';
-                            hiddenInput.name = 'delete_ids';
-                            hiddenInput.value = JSON.stringify(transactionIds);
-                            form.appendChild(hiddenInput);
-                            form.submit();
-                        }
-                    });
-                }
-
-                //Aplica el filtro de las fechas 
-                function applyDateFilter() {
-                    submitForm();
-                }
-        
-                //Marca todas las checkboxes
-                function selectAllTransactions() {
-                    const checkboxes = document.querySelectorAll('input[name="transaction_ids"]');
-                    checkboxes.forEach(checkbox => checkbox.checked = true);
-                }
-        
-                //Desarca todas las checkboxes
-                function deselectAllTransactions() {
-                    const checkboxes = document.querySelectorAll('input[name="transaction_ids"]');
-                    checkboxes.forEach(checkbox => checkbox.checked = false);
-                }
-            </script>   
         </div>
     </div>      
 </main>
-<script src="../../static/HomePage/switch_mode.js"></script>
 {% endblock %}
 {% block javascript %}
-<script>
-    /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
-function openNav() {
-  document.getElementById("Sidebar").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
-  document.getElementById("boton").style.display = "none";
-  document.getElementById("pagina_principal").style.width = "80%";
-}
-
-/* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
-function closeNav() {
-  document.getElementById("Sidebar").style.width = "0";
-  document.getElementById("main").style.marginLeft = "0";
-  document.getElementById("boton").style.display = "block";
-  document.getElementById("pagina_principal").style.width = "94%";
-}
-</script>
+{% load static %}
+<script src="{% static 'js/ver_transaction.js' %}"></script>
 {% endblock %}

@@ -5,7 +5,7 @@ En la rama main de este proyecto se presenta todo lo realizado de manera conjunt
 - Benjamín San Martin V
 - Felipe Olivares 
 - Rodrigo Hidalgo 
-- Sebastián Moreno 
+- Sebastián Monteiro 
 - Vicente Lepe    
 ### Curso: CC4101-1 Ingeniería de Software
 ### Profesora : Jocelyn Simmonds
