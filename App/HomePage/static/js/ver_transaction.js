@@ -237,6 +237,7 @@ function openNav() {
   document.getElementById("Sidebar").style.width = "250px";
   document.getElementById("main").style.marginLeft = "250px";
   document.getElementById("boton").style.display = "none";
+  document.getElementById("pagina_transacciones").style.width = "80%";
 }
   
 /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
@@ -244,4 +245,5 @@ function closeNav() {
   document.getElementById("Sidebar").style.width = "0";
   document.getElementById("main").style.marginLeft = "0";
   document.getElementById("boton").style.display = "block";
+  document.getElementById("pagina_transacciones").style.width = "96%";
 }
