@@ -52,4 +52,4 @@ sus finanzas, entregándoles una experiencia grata, cómoda y segura.
 - Categorización de las transacciones (Ingreso/Egreso).
 
 # Estructura del proyecto
-La aplicación se encuentra en 'App->HomePage'. En dicha carpeta, "static" contiene todos los archivos de diseño de la aplicación; JS, CSS e imágenes. Por otro lado, en "templates" están todos los archivos HTML. Luego, en "utils" se pueden hallar las validaciones del servidor y sus pruebas unitarias, y el resto de archivos .py que están en paralelo a estas carpetas, componen toda la lógica de la aplicación.
+La aplicación se encuentra en 'App->HomePage'. En dicha carpeta, "static" contiene todos los archivos de diseño de la aplicación; JS, CSS e imágenes. Por otro lado, en "templates" están todos los archivos HTML. Luego, en "utils" se pueden hallar las validaciones del servidor y sus pruebas unitarias, y el resto de archivos .py que están en paralelo a estas carpetas, componen toda la lógica de la aplicación. Para finalizar, en la carpeta Views es posible hallar todas las vistas disponibles en la aplicación, cuya lógica de funcionamiento se describe al detalle en el archivo VIEWS.md.

@@ -14,12 +14,15 @@
                             <h1 class="my-0 fw-semibold normal-text">Registro de usuario</h1>
                         </div>
                         <div>
-                            <p class="my-0 normal-text" style="text-align: center" > ¿Ya tiene una cuenta? <a class="link-body-emphasis d-inline-flex text-decoration-none rounded" href="{% url 'login' %}">Inicie sesión aquí</a> </p>
+                            <p class="my-0 normal-text" style="text-align: center" > ¿Ya tiene una cuenta? 
+                                <a class="link-body-emphasis d-inline-flex text-decoration-none rounded" 
+                                   href="{% url 'login' %}">Inicie sesión aquí</a> 
+                            </p>
                         </div>
                     </div>
                     <div class="card-body">
                         {% if errores %}
-                        <div class="alert alert-danger" role="alert">
+                        <div class="alert alert-danger col-lg-6 offset-lg-3" role="alert">
                             {% for error in errores %}
                                 {{ error }} <br>
                             {% endfor %}
