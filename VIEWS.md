@@ -7,7 +7,7 @@ Entonces, las primeras vistas a señalar son el inicio y registro de sesión. A 
 ![Inicio de sesión en modo claro](Views/Light/Light-InicioUsuario.png)
 ![Inicio de sesión en modo claro con error](Views/Light/Light-InicioUsuario_Error.png)
 
-Es posible visualizar también de qué manera se puede ver la presencia de errores en el formulario, por ejemplo si el nombre de usuario o contraseña no es correcto. Entonces, a continuación se presenta lo mismo, pero para modo oscuro:
+Es posible visualizar también la presencia de errores en el formulario, por ejemplo si el nombre de usuario o contraseña no es correcto. Entonces, a continuación se presenta lo mismo, pero para modo oscuro:
 
 ![Inicio de sesión en modo oscuro](Views/Dark/Dark-InicioUsuario.png)
 ![Inicio de sesión en modo oscuro con error](Views/Dark/Dark-InicioUsuario_Error.png)
@@ -18,13 +18,13 @@ Para el registro de usuario se tiene algo idéntico a lo visto en el inicio de s
 ![Registro de usuario en modo claro](Views/Light/Light-RegistroUsuario.png)
 ![Registro de usuario en modo claro con error](Views/Light/Light-RegistroUsuario_Error.png)
 
-Es posible visualizar también la presencia de errores en el formulario, por ejemplo si el nombre de usuario o contraseña no es correcto. Entonces, a continuación se presenta lo mismo, pero para modo oscuro:
+Al igual que en el inicio de sesión, es posible visualizar la presencia de errores en el formulario, por ejemplo si el email no es válido. Entonces, a continuación se presenta lo mismo, pero para modo oscuro:
 
 ![Registro de usuario en modo oscuro](Views/Dark/Dark-RegistroUsuario.png)
 ![Registro de usuario en modo oscuro con error](Views/Dark/Dark-RegistroUsuario_Error.png)
 
 ## Página principal
-Una vez se pudo efectuar un correcto inicio de sesión, por ejemplo en este caso para el usuario de nombre 'Rodrigo Hidalgo', se puede acceder a la página de finanzas. Lo primero que se observa para dispositivos de tamaño grande es una barra lateral que permite ir a otras secciones de la página; para dispositivos de tamaño menor esta no aparece inmediatamente, sino que hay que presionar un botón que la despliegue (esto por temas estéticos y de orden). Es posible contraer y expandir esta barra lateral a conveniencia, tan solo presionando la 'X' cuando esta está, o el botón de abir menú en la esquina superior izquierda, respectivamente. A continuación se presentan las distintas vistas disponibles de la página principal cuando no hay transacciones disponibles; cuando sí hay se mostrará al final de este archivo.
+Una vez se pudo efectuar un correcto inicio de sesión, por ejemplo en este caso para el usuario de nombre 'Rodrigo Hidalgo', se puede acceder a la página de finanzas. Lo primero que se observa para dispositivos de tamaño grande es una barra lateral que permite ir a otras secciones de la página; para dispositivos de tamaño menor esta no aparece inmediatamente, sino que hay que presionar un botón que la despliegue (esto por temas estéticos y de orden). Es posible contraer y expandir esta barra lateral a conveniencia, tan solo presionando la 'X' cuando esta está, o el botón de abrir menú en la esquina superior izquierda, respectivamente. A continuación se presentan las distintas vistas disponibles de la página principal cuando no hay transacciones disponibles; cuando sí hay se mostrará al final de este archivo.
 
 ![Página principal con sidebar, en modo claro](Views/Light/Light-MainPage_Sidebar.png)
 ![Página principal sin sidebar, en modo claro](Views/Light/Light-MainPage_NoSidebar.png)
@@ -35,7 +35,7 @@ Análogamente para el modo oscuro:
 ![Página principal sin sidebar, en modo oscuro](Views/Dark/Dark-MainPage_NoSidebar.png)
 
 ## Añadir transacción
-Es posible llegar a esta sección haciendo uso del botón 'Añadir transacción' de la barra lateral en la página principal. Aquí se añaden transacciones, estableciéndose un tipo de transferencia, tipo de transacción, cantidad, fecha y comentario. Para los dos primeros campos, al presionar en estos se despliegan todas las posibles selecciones, por su parte la cantidad debe ser un número entero, la fecha es posible seleccionarla desde el calendario que se muestra, y el comentario es opcional. Para cada uno de estos campos hay validaciones que arrojan algún error en caso de que no se cumplan las condiciones, lo que no se mostrará porque es idéntico al inicio y registro de sesión. Lo siguiente que se mostrará será el añadido de alguna transacción, y a su vez la confirmación que se debe realizar para hacer esto (luego de presionar 'Agregar'), tanto para modo claro como oscuro: 
+Es posible llegar a esta sección haciendo uso del botón 'Añadir transacción' de la barra lateral en la página principal. Aquí se añaden transacciones, estableciéndose un tipo de transferencia, tipo de transacción, cantidad, fecha y comentario. Para los dos primeros campos, al presionar en estos se despliegan todas las posibles selecciones, por su parte, la cantidad debe ser un número entero, la fecha es posible seleccionarla desde el calendario que se muestra, y el comentario es opcional. Para cada uno de estos campos hay validaciones que arrojan algún error en caso de que no se cumplan las condiciones, lo que no se mostrará porque es idéntico al inicio y registro de sesión. Lo siguiente que se puede ver es el añadido de alguna transacción, y a su vez la confirmación que se debe realizar para hacer esto (luego de presionar 'Agregar'), tanto para modo claro como oscuro: 
 
 ![Añadir transacción, en modo claro](Views/Light/Light-AnadirTransaccion.png)
 ![Añadir transacción con error, en modo claro](Views/Light/Light-AnadirTransaccion_Confirmar.png)
@@ -57,7 +57,7 @@ Análogamente para el modo oscuro:
 ![Ver transacciones, en modo oscuro](Views/Dark/Dark-VerTransacciones.png)
 
 ## Modificar transacción
-Es posible llegar a esta sección desde la anterior sección descrita, es decir, la vista de transacciones. En esta, si se deseara cambiar algún campo de la transacción, es posible realizarlo siempre que los nuevos datos ingresados sean correctos; se mostrará el error que corresponda si es que lo hay. Al igual que para añadir, se debe realizar confirmación de los cambios si se desea efectuarlos. A continuación se muestra esto en modos claro y oscuro:
+Es posible llegar a esta sección desde la anterior sección descrita, es decir, la vista de transacciones, esto presionando el botón 'Editar' correspondiente a cada transacción. En esta, si se deseara cambiar algún campo de la transacción, es posible realizarlo siempre que los nuevos datos ingresados sean correctos; se mostrará el error que corresponda si es que lo hay. Al igual que para añadir, se debe realizar confirmación de los cambios si se desea efectuarlos. A continuación se muestra esto en modos claro y oscuro:
 
 ![Modificar transacción, en modo claro](Views/Light/Light-ModificarTransaccion.png)
 
