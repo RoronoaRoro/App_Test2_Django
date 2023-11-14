@@ -2,11 +2,11 @@
 En la rama main de este proyecto se presenta todo lo realizado de manera conjunta por parte del grupo 8 en el curso "Ingeniería de Software", en el semestre de otoño de 2023. La descripción del grupo y el curso es la siguiente:
 ## Grupo 8 - Los Spaghetis
 ### Integrantes: 
-- Benjamín San Martin V
-- Felipe Olivares 
-- Rodrigo Hidalgo 
-- Sebastián Monteiro 
-- Vicente Lepe    
+- Benjamín San Martin V ([BenjaminPozo](https://github.com/BenjaminPozo))
+- Felipe Olivares ([FelipeFbh](https://github.com/FelipeFbh))
+- Rodrigo Hidalgo ([RoronoaRoro](https://github.com/RoronoaRoro))
+- Sebastián Monteiro ([Sebamon2040](https://github.com/Sebamon2040))
+- Vicente Lepe ([VicenteLepe](https://github.com/VicenteLepe))
 ### Curso: CC4101-1 Ingeniería de Software
 ### Profesora : Jocelyn Simmonds
 
